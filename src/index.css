@@ -21,11 +21,7 @@ h2{
 	color:white;
 	font-size: 30px;
 }
-.formularios{
-	max-width: 640px;
-	width: 93%;
-	margin: auto;
-}
+
 span{
 	color:white;
 	display: inline-block;
@@ -38,6 +34,17 @@ ul{
 }
 .react-datepicker-wrapper{
 	display: block !important;
+}
+.container{
+	display: flex;
+	justify-content: center;
+	max-width: 1300px;
+	width: 93%;
+	margin: auto;
+}
+.container > *{
+	width: 50%;
+	margin: 0;
 }
 li{
 	margin: 0;
@@ -60,6 +67,7 @@ input, textarea{
 }
 textarea{
 	height: 90px;
+	padding-top: 10px;
 }
 input:focus, textarea:focus{
 	border: 4px solid #000;
