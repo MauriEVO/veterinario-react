@@ -1,24 +1,22 @@
 import React, {Component} from 'react';
 import uuid from 'uuid'
+import PropTypes from 'prop-types';
 
-
+const stateInicial = {
+	cita :{
+		mascota:'',
+		propietario: '',
+		hora:'',
+		fecha:'',
+		sintomas: ''
+	},
+	error: false
+}
 class NuevaCita extends Component {
-	state = {
-		cita :{
-			mascota:'',
-			propietario: '',
-			hora:'',
-			fecha:'',
-			sintomas: ''
-		},
-		error: false
-	}
 
-	
+	state = {...stateInicial}
 
 	handleChange = e => {
-		console.log('estas escribiendo', e.target.name + ' '+ e.target.value)
-
 		this.setState({
 			cita: {
 				...this.state.cita,
@@ -35,7 +33,8 @@ class NuevaCita extends Component {
 		if(mascota === '' || propietario === '' || hora === '', fecha === '' || sintomas === ''){
 			this.setState({
 				error : true
-			})
+			});
+			return;
 		}
 
 		//-- generar un id copiando el state primero
@@ -44,11 +43,22 @@ class NuevaCita extends Component {
 
 		this.props.crearNuevaCita(nuevaCita)
 
+		this.setState({
+			...stateInicial
+		})
+
 	}
 
 	render() {
+
+		const { error } = this.state
+		const title = error ? <div className="mensaje_error">Todos los campos son obligatorios</div> : null;
+
 		return(
 			<div className="formularios">
+				
+				{ title }
+
 				<form onSubmit={this.handleSubmit}>
 					<ul>
 						<li>
@@ -81,5 +91,7 @@ class NuevaCita extends Component {
 		);
 	}
 }
-
+NuevaCita.propTypes = {
+	crearNuevaCita : PropTypes.func.isRequired
+}
 export default NuevaCita;
